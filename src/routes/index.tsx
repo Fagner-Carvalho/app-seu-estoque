@@ -4,7 +4,9 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import history from 'src/routes/history';
 import Login from 'src/views/login/Login';
-import CreateUsers from 'src/views/users/CreateUsers';
+import Dashboard from 'src/views/dashboard/Dashboard';
+import ListUsers from 'src/views/users/list';
+import FormUsers from 'src/views/users/form';
 
 import AppRoutes, { HOME } from './routes';
 
@@ -13,7 +15,10 @@ const Routes = () => (
     <Switch>
       <Redirect path="/" to={HOME} exact />
       <Route path={AppRoutes.Login} component={Login} exact />
-      <Route path={AppRoutes.Dashboard} component={CreateUsers} exact />
+      <Route path={AppRoutes.ListUsers} component={ListUsers} exact />
+      <Route path={AppRoutes.CreateUsers} component={FormUsers} exact />
+      <Route path={AppRoutes.UpdateUsers} component={FormUsers} exact />
+      <Route path={AppRoutes.Dashboard} component={Dashboard} exact />
       <Route
         path="*"
         render={() => (

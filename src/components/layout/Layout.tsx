@@ -5,7 +5,6 @@ import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -13,7 +12,7 @@ import Badge from '@mui/material/Badge';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
+import NestedList from './NestedList';
 
 const drawerWidth = 240;
 
@@ -67,13 +66,19 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme();
 
-type DashboardLayoutProps = {
-  children: JSX.Element | JSX.Element[];
-};
+interface DashboardLayoutProps {
+  children: JSX.Element | JSX.Element[] | undefined;
+
+}
+
+// interface DefaultProps {
+//   loading: false,
+// }
 
 export default function LayoutContent(props: DashboardLayoutProps) {
   const { children } = props;
   const [open, setOpen] = React.useState(true);
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -107,7 +112,7 @@ export default function LayoutContent(props: DashboardLayoutProps) {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Logo
+              SEU ESTOQUE
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -130,11 +135,7 @@ export default function LayoutContent(props: DashboardLayoutProps) {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List component="nav">
-            {mainListItems}
-            <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
-          </List>
+          <NestedList />
         </Drawer>
         <Box
           component="main"
