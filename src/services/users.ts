@@ -15,3 +15,10 @@ export const GetUsers = () => api
 export const AddUsers = (payload: any) => api
   .post('/users', payload)
   .then(({ data }) => data);
+
+export const Authenticate = (
+  email: FormDataEntryValue | null,
+  password: FormDataEntryValue | null,
+) => api
+  .post('/sessions', { email, password })
+  .then(({ data }) => data);

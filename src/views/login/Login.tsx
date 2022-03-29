@@ -15,6 +15,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useHistory } from 'react-router-dom';
 import AppRoutes from 'src/routes/routes';
+import { Authenticate } from 'src/services/users';
+import { useSnackBar } from 'src/context/SnackbarContext';
 
 function Copyright(props: any) {
   return (
@@ -30,15 +32,30 @@ const theme = createTheme();
 
 export default function SignIn() {
   const history = useHistory();
+  const snackBar = useSnackBar();
+
+  const authenticate = React.useCallback(
+    async (email: FormDataEntryValue | null, password: FormDataEntryValue | null) => {
+      try {
+        const result = await Authenticate(email, password);
+        snackBar.showSnackBar('Seja bem-vindo!', 'success');
+        history.push(AppRoutes.Dashboard);
+        console.log('Authenticate ==> ', result);
+      } catch (e: any) {
+        snackBar.showSnackBar('Email ou senha incorreto!', 'error');
+        console.log('erro:', e);
+      }
+    },
+    [],
+  );
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    history.push(AppRoutes.Dashboard);
+    const email = data.get('email');
+    const password = data.get('password');
+
+    authenticate(email as FormDataEntryValue, password as FormDataEntryValue);
   };
 
   return (

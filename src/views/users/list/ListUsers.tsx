@@ -41,8 +41,6 @@ export default function ListUsers() {
     effectCallback();
   }, []);
 
-  console.log('rows => ', rows);
-
   const deleteUser = React.useCallback(
     (id: GridRowId) => () => {
       // setTimeout(() => {

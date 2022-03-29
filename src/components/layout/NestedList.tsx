@@ -22,7 +22,6 @@ import useLayout from './useLayout';
 export default function NestedList() {
   const history = useHistory();
   const { selectedIndex, setSelectedIndex } = useLayout();
-  console.log('selectedIndex', selectedIndex);
 
   const [open, setOpen] = React.useState(false);
   // const [selectedIndex, setSelectedIndex] = React.useState(0);
