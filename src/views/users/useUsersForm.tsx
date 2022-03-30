@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'src/hooks/';
 import { UseForm } from 'src/hooks/useForm';
+import { FORM_VALUES } from './form/Form';
 
 interface IUserFormContext {
   form: UseForm<any>;
@@ -25,7 +26,7 @@ export const UserFormConsumer = ({ children }: IUserFormConsumer) => (
 );
 
 export const UserFormProvider = ({ children }: IUserFormProvider) => {
-  const form = useForm({});
+  const form = useForm(FORM_VALUES);
 
   return (
     <UserFormContext.Provider

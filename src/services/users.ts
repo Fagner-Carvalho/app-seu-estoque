@@ -12,8 +12,16 @@ export const GetUsers = () => api
   .get('/users')
   .then(({ data }) => data);
 
+export const GetUser = (id: string) => api
+  .get(`/users/${id}`)
+  .then(({ data }) => data);
+
 export const AddUsers = (payload: any) => api
   .post('/users', payload)
+  .then(({ data }) => data);
+
+export const UpdateUser = (id: string, payload: any) => api
+  .put(`/users/${id}`, payload)
   .then(({ data }) => data);
 
 export const Authenticate = (

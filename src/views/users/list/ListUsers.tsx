@@ -10,7 +10,6 @@ import {
 } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import AutorenewIcon from '@mui/icons-material/Autorenew';
 import AddIcon from '@mui/icons-material/Add';
 
 import Breadcrumb from 'src/components/breadcrumbs/Breadcrumbs';
@@ -58,32 +57,17 @@ export default function ListUsers() {
     [],
   );
 
-  const toggleAdmin = React.useCallback(
-    (id: GridRowId) => () => {
-      // setRows((prevRows) => prevRows
-      //   .map((row) => (row.id === id ? { ...row, status: !row.status } : row)));
-      console.log(id);
-    },
-    [],
-  );
-
   const columns = React.useMemo(
     () => [
       {
-        field: 'name', headerName: 'Name', type: 'string', width: 400,
+        field: 'name', headerName: 'Nome', type: 'string', width: 400,
       },
       {
         field: 'email', headerName: 'E-mail', type: 'string', width: 400,
       },
       {
-        field: 'status',
-        headerName: 'Status',
-        type: 'boolean',
-        width: 200,
-      },
-      {
         field: 'actions',
-        headerName: 'Actions',
+        headerName: 'Ações',
         type: 'actions',
         width: 80,
         flex: 0.3,
@@ -96,13 +80,6 @@ export default function ListUsers() {
             showInMenu
           />,
           <GridActionsCellItem
-            key={2}
-            icon={<AutorenewIcon />}
-            label="Ativar/Inativar"
-            onClick={toggleAdmin(params.id)}
-            showInMenu
-          />,
-          <GridActionsCellItem
             key={3}
             icon={<DeleteIcon />}
             label="Remover"
@@ -112,7 +89,7 @@ export default function ListUsers() {
         ],
       },
     ],
-    [deleteUser, toggleAdmin],
+    [deleteUser],
   );
 
   return (

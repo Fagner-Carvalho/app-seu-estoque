@@ -9,7 +9,7 @@ export interface UseForm<S> {
   errors: UseValidationErrors,
   isValid: boolean,
   setFromChangeEvent: (arg0: any) => void,
-  validate: (customValidationSchema?: any) => Promise<boolean>,
+  validate: (customValidationSchema?: any, valuesValidation?: any) => Promise<boolean>,
 }
 
 function useForm<S>(defaultValues: S, validationSchema?: any) {
@@ -30,16 +30,17 @@ function useForm<S>(defaultValues: S, validationSchema?: any) {
     if (event.target.name === undefined) {
       throw new Error('Wrong event');
     }
+
     setValue(event.target.name, event.target.value);
   };
 
-  const validate = async (customValidationSchema?: any) => {
+  const validate = async (customValidationSchema?: any, valuesValidation?: any) => {
     const validation = customValidationSchema || validationSchema;
     if (validation === undefined) {
       throw new Error('Schema not defined');
     }
     try {
-      await validation.validate(values, {
+      await validation.validate(valuesValidation, {
         abortEarly: false,
       });
       return true;

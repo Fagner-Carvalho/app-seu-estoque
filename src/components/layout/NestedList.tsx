@@ -69,6 +69,7 @@ export default function NestedList() {
       <ListItemButton
         selected={selectedIndex === 2}
         onClick={(event) => handleListItemClick(event, 2)}
+        disabled
       >
         <ListItemIcon>
           <LocalShippingIcon />
@@ -89,6 +90,7 @@ export default function NestedList() {
       <ListItemButton
         selected={selectedIndex === 4}
         onClick={(event) => handleListItemClick(event, 4)}
+        disabled
       >
         <ListItemIcon>
           <InventoryIcon />
@@ -99,6 +101,7 @@ export default function NestedList() {
       <ListItemButton
         selected={selectedIndex === 5}
         onClick={(event) => handleListItemClick(event, 5)}
+        disabled
       >
         <ListItemIcon>
           <SettingsIcon />
