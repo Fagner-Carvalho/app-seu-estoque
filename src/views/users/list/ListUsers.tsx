@@ -16,19 +16,21 @@ import Breadcrumb from 'src/components/breadcrumbs/Breadcrumbs';
 import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import AppRoutes from 'src/routes/routes';
-import { GetUsers } from 'src/services/users';
+import { DeleteUser, GetUsers } from 'src/services/users';
 import useLayout from 'src/components/layout/useLayout';
+import { useSnackBar } from 'src/context/SnackbarContext';
 import Layout from '../../../components/layout';
 
 export default function ListUsers() {
   const history = useHistory();
+  const snackBar = useSnackBar();
   const { setSelectedIndex } = useLayout();
   const [rows, setRows] = useState([]);
 
   setSelectedIndex(1);
 
-  useEffect(() => {
-    async function effectCallback() {
+  const getUsers = React.useCallback(
+    async () => {
       await GetUsers()
         .then((response: any) => {
           setRows(response);
@@ -36,16 +38,24 @@ export default function ListUsers() {
         .catch(() => {
           console.log('erro');
         });
-    }
-    effectCallback();
+    },
+    [],
+  );
+
+  useEffect(() => {
+    getUsers();
   }, []);
 
   const deleteUser = React.useCallback(
-    (id: GridRowId) => () => {
-      // setTimeout(() => {
-      //   setRows((prevRows) => prevRows.filter((row) => row.id !== id));
-      // });
-      console.log(id);
+    (id: string) => async () => {
+      try {
+        await DeleteUser(id);
+        snackBar.showSnackBar('Usuário deletado com sucesso!', 'success');
+        getUsers();
+        return;
+      } catch (error) {
+        snackBar.showSnackBar('Erro ao deletar usuário!', 'error');
+      }
     },
     [],
   );

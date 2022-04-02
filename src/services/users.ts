@@ -24,6 +24,10 @@ export const UpdateUser = (id: string, payload: any) => api
   .put(`/users/${id}`, payload)
   .then(({ data }) => data);
 
+export const DeleteUser = (id: string) => api
+  .delete(`/users/${id}`)
+  .then(({ data }) => data);
+
 export const Authenticate = (
   email: FormDataEntryValue | null,
   password: FormDataEntryValue | null,
