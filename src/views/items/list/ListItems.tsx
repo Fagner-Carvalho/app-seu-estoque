@@ -5,6 +5,7 @@ import Paper from '@mui/material/Paper';
 import {
   DataGrid,
   GridActionsCellItem,
+  GridColDef,
   GridRowId,
   ptBR,
 } from '@mui/x-data-grid';
@@ -16,45 +17,45 @@ import Breadcrumb from 'src/components/breadcrumbs/Breadcrumbs';
 import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import AppRoutes from 'src/routes/routes';
-import { DeleteUser, GetUsers } from 'src/services/users';
+import { DeleteItem, GetItems } from 'src/services/items';
 import useLayout from 'src/components/layout/useLayout';
 import { useSnackBar } from 'src/context/SnackbarContext';
 import Layout from '../../../components/layout';
 
-export default function ListUsers() {
+export default function ListItems() {
   const history = useHistory();
   const snackBar = useSnackBar();
   const { setSelectedIndex } = useLayout();
   const [rows, setRows] = useState([]);
 
-  setSelectedIndex(1);
+  setSelectedIndex(3);
 
-  const getUsers = React.useCallback(
+  const getItems = React.useCallback(
     async () => {
-      await GetUsers()
+      await GetItems()
         .then((response: any) => {
           setRows(response);
         })
         .catch(() => {
-          snackBar.showSnackBar('Erro ao listar usuários', 'error');
+          snackBar.showSnackBar('Erro ao listar itens!', 'error');
         });
     },
     [],
   );
 
   useEffect(() => {
-    getUsers();
+    getItems();
   }, []);
 
-  const deleteUser = React.useCallback(
+  const deleteItem = React.useCallback(
     (id: string) => async () => {
       try {
-        await DeleteUser(id);
-        snackBar.showSnackBar('Usuário deletado com sucesso!', 'success');
-        getUsers();
+        await DeleteItem(id);
+        snackBar.showSnackBar('Item deletado com sucesso!', 'success');
+        getItems();
         return;
       } catch (error) {
-        snackBar.showSnackBar('Erro ao deletar usuário!', 'error');
+        snackBar.showSnackBar('Erro ao deletar item!', 'error');
       }
     },
     [],
@@ -62,18 +63,35 @@ export default function ListUsers() {
 
   const showEdit = React.useCallback(
     (id: GridRowId) => () => {
-      history.push(`/users/update/${id}`);
+      history.push(`/items/update/${id}`);
     },
     [],
   );
 
-  const columns = React.useMemo(
+  const columns: GridColDef[] = React.useMemo(
     () => [
       {
-        field: 'name', headerName: 'Nome', type: 'string', width: 400,
+        field: 'name', headerName: 'Nome', type: 'string', width: 300,
       },
       {
-        field: 'email', headerName: 'E-mail', type: 'string', width: 400,
+        field: 'category',
+        headerName: 'Categoria',
+        type: 'string',
+        width: 250,
+        valueFormatter: ({ value }: any) => value.name,
+      },
+      {
+        field: 'unitMeasure',
+        headerName: 'Unidade de Medida',
+        type: 'string',
+        width: 250,
+        valueFormatter: ({ value }: any) => value.name,
+      },
+      {
+        field: 'status',
+        headerName: 'Status',
+        type: 'boolean',
+        width: 100,
       },
       {
         field: 'actions',
@@ -93,19 +111,19 @@ export default function ListUsers() {
             key={3}
             icon={<DeleteIcon />}
             label="Remover"
-            onClick={deleteUser(params.id)}
+            onClick={deleteItem(params.id)}
             showInMenu
           />,
         ],
       },
     ],
-    [deleteUser],
+    [deleteItem],
   );
 
   return (
     <Layout>
       <Breadcrumb
-        breadcrumbs={['Usuários', 'Listagem']}
+        breadcrumbs={['Items', 'Listagem']}
       />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3}>
@@ -127,7 +145,7 @@ export default function ListUsers() {
                 <Button
                   variant="outlined"
                   startIcon={<AddIcon />}
-                  onClick={() => history.push(AppRoutes.CreateUsers)}
+                  onClick={() => history.push(AppRoutes.CreateItems)}
                 >
                   Adiconar
                 </Button>

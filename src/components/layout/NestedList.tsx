@@ -79,7 +79,10 @@ export default function NestedList() {
 
       <ListItemButton
         selected={selectedIndex === 3}
-        onClick={(event) => handleListItemClick(event, 3)}
+        onClick={(event) => {
+          handleListItemClick(event, 3);
+          history.push(AppRoutes.ListItems);
+        }}
       >
         <ListItemIcon>
           <CategoryIcon />

@@ -43,7 +43,6 @@ export default function SignIn() {
         console.log('Authenticate ==> ', result);
       } catch (e: any) {
         snackBar.showSnackBar('Email ou senha incorreto!', 'error');
-        console.log('erro:', e);
       }
     },
     [],
