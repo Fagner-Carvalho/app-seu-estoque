@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, ReactReduxContext } from 'react-redux';
+import { SnackBarProvider } from 'src/context/SnackbarContext';
 
 import configureStore from 'src/store';
 import reportWebVitals from 'src/reportWebVitals';
@@ -13,7 +14,9 @@ const rootElement = document.getElementById('root');
 const app = (
   <React.StrictMode>
     <Provider store={store} context={ReactReduxContext}>
-      <Routes />
+      <SnackBarProvider>
+        <Routes />
+      </SnackBarProvider>
     </Provider>
   </React.StrictMode>
 );

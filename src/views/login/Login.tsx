@@ -4,10 +4,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
@@ -15,6 +11,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useHistory } from 'react-router-dom';
 import AppRoutes from 'src/routes/routes';
+import { Authenticate } from 'src/services/users';
+import { useSnackBar } from 'src/context/SnackbarContext';
 
 function Copyright(props: any) {
   return (
@@ -30,15 +28,29 @@ const theme = createTheme();
 
 export default function SignIn() {
   const history = useHistory();
+  const snackBar = useSnackBar();
+
+  const authenticate = React.useCallback(
+    async (email: FormDataEntryValue | null, password: FormDataEntryValue | null) => {
+      try {
+        const result = await Authenticate(email, password);
+        snackBar.showSnackBar('Seja bem-vindo!', 'success');
+        history.push(AppRoutes.Dashboard);
+        console.log('Authenticate ==> ', result);
+      } catch (e: any) {
+        snackBar.showSnackBar('Email ou senha incorreto!', 'error');
+      }
+    },
+    [],
+  );
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    history.push(AppRoutes.Dashboard);
+    const email = data.get('email');
+    const password = data.get('password');
+
+    authenticate(email as FormDataEntryValue, password as FormDataEntryValue);
   };
 
   return (
@@ -65,7 +77,8 @@ export default function SignIn() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              variant="standard"
+              label="Email"
               name="email"
               autoComplete="email"
               autoFocus
@@ -75,14 +88,11 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="Senha"
               type="password"
               id="password"
+              variant="standard"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
             <Button
               type="submit"
@@ -90,20 +100,8 @@ export default function SignIn() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Entrar
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  Dont have an account? Sign Up
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
