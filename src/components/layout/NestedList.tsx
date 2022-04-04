@@ -87,7 +87,7 @@ export default function NestedList() {
         <ListItemIcon>
           <CategoryIcon />
         </ListItemIcon>
-        <ListItemText primary="Items" />
+        <ListItemText primary="Itens" />
       </ListItemButton>
 
       <ListItemButton
