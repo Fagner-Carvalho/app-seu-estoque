@@ -26,3 +26,8 @@ npm install ou yarn
 ```bash
 yarn start
 ```
+
+
+### <a name="dev"></a> 💪 Desenvolvedor
+
+![Fagner-Carvalho](https://avatars.githubusercontent.com/u/5354645?s=100)
