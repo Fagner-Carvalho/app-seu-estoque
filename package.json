@@ -1,5 +1,5 @@
 {
-  "name": "mf-schedule",
+  "name": "api-seu-estoque",
   "version": "0.1.0",
   "config-overrides-path": "./rewired.js",
   "dependencies": {
