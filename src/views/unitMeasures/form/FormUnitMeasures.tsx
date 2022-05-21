@@ -15,25 +15,25 @@ import Button from '@mui/material/Button';
 import AppRoutes from 'src/routes/routes';
 import useLayout from 'src/components/layout/useLayout';
 import { useSnackBar } from 'src/context/SnackbarContext';
-import { AddCategory, GetCategory, UpdateCategory } from 'src/services/categories';
+import { AddUnitMeasure, GetUnitMeasure, UpdateUnitMeasure } from 'src/services/unitMeasures';
 import Layout from '../../../components/layout';
-import useCategoryForm from '../useCategoriesForm';
-import { CATEGORY_FORM, wrapValidation } from './Form';
+import useUnitMeasureForm from '../useUnitMeasuresForm';
+import { UNIT_MEASURE_FORM, wrapValidation } from './Form';
 
-export default function FormCategories() {
+export default function FormUnitMeasures() {
   const history = useHistory();
   const params: any = useParams();
   const snackBar = useSnackBar();
   const { setSelectedIndex } = useLayout();
-  const { form } = useCategoryForm();
+  const { form } = useUnitMeasureForm();
 
-  setSelectedIndex(6);
+  setSelectedIndex(7);
 
-  const showForm = async (Category: any) => {
+  const showForm = async (UnitMeasure: any) => {
     let showValues = {};
     showValues = {
-      name: Category.name,
-      description: Category.description,
+      name: UnitMeasure.name,
+      abbreviation: UnitMeasure.abbreviation,
     };
 
     form.setAll((prevState: any) => ({
@@ -43,32 +43,32 @@ export default function FormCategories() {
   };
 
   useEffect(() => {
-    async function effectGetCategory() {
+    async function effectGetUnitMeasure() {
       if (params?.id) {
-        const response = await GetCategory(params?.id);
+        const response = await GetUnitMeasure(params?.id);
         await showForm(response);
       }
     }
-    effectGetCategory();
+    effectGetUnitMeasure();
   }, []);
 
   const save = useCallback(
     async (payload) => {
-      const validation = wrapValidation(CATEGORY_FORM.VALIDATION);
+      const validation = wrapValidation(UNIT_MEASURE_FORM.VALIDATION);
       if (await form.validate(validation, payload)) {
         const id = params?.id;
         try {
           if (id) {
-            await UpdateCategory(id, payload);
+            await UpdateUnitMeasure(id, payload);
           } else {
-            await AddCategory(payload);
+            await AddUnitMeasure(payload);
           }
 
-          snackBar.showSnackBar(`Categoria ${id ? 'atualizada' : 'cadastrada'} com sucesso!`, 'success');
-          history.push(AppRoutes.ListCategories);
+          snackBar.showSnackBar(`Unidade de medida ${id ? 'atualizada' : 'cadastrada'} com sucesso!`, 'success');
+          history.push(AppRoutes.ListUnitMeasures);
           return;
         } catch (e: any) {
-          snackBar.showSnackBar(`Erro ao ${id ? 'atualizar' : 'cadastrar'} Categoria!`, 'error');
+          snackBar.showSnackBar(`Erro ao ${id ? 'atualizar' : 'cadastrar'} unidade de medida!`, 'error');
           return;
         }
       }
@@ -86,7 +86,7 @@ export default function FormCategories() {
   return (
     <Layout>
       <Breadcrumb
-        breadcrumbs={['Categorias', 'Listagem', params.id ? 'Editar' : 'Adicionar']}
+        breadcrumbs={['Unidade de Medidas', 'Listagem', params.id ? 'Editar' : 'Adicionar']}
       />
       <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3}>
@@ -116,13 +116,16 @@ export default function FormCategories() {
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <TextField
-                    id="description"
-                    name="description"
-                    label="Descricação"
+                    required
+                    id="abbreviation"
+                    name="abbreviation"
+                    label="Abreviação"
                     fullWidth
                     variant="standard"
-                    value={form.values.description || ''}
+                    value={form.values.abbreviation || ''}
                     onChange={form.setFromChangeEvent}
+                    error={!!form.errors.getFirst('abbreviation')}
+                    helperText={form.errors.getFirst('abbreviation')}
                   />
                 </Grid>
                 <Grid
@@ -136,7 +139,7 @@ export default function FormCategories() {
                     startIcon={<CloseIcon />}
                     color="error"
                     sx={{ mr: 3 }}
-                    onClick={() => history.push(AppRoutes.ListCategories)}
+                    onClick={() => history.push(AppRoutes.ListUnitMeasures)}
                   >
                     Cancelar
                   </Button>

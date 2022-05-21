@@ -11,6 +11,8 @@ import ListItems from 'src/views/items/list';
 import FormItems from 'src/views/items/form';
 import ListCategories from 'src/views/categories/list';
 import FormCategories from 'src/views/categories/form';
+import ListUnitMeasures from 'src/views/unitMeasures/list';
+import FormUnitMeasures from 'src/views/unitMeasures/form';
 
 import AppRoutes, { HOME } from './routes';
 
@@ -29,6 +31,9 @@ const Routes = () => (
       <Route path={AppRoutes.ListCategories} component={ListCategories} exact />
       <Route path={AppRoutes.CreateCategories} component={FormCategories} exact />
       <Route path={AppRoutes.UpdateCategories} component={FormCategories} exact />
+      <Route path={AppRoutes.ListUnitMeasures} component={ListUnitMeasures} exact />
+      <Route path={AppRoutes.CreateUnitMeasures} component={FormUnitMeasures} exact />
+      <Route path={AppRoutes.UpdateUnitMeasures} component={FormUnitMeasures} exact />
       <Route
         path="*"
         render={() => (

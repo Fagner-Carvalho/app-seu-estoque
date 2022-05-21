@@ -114,7 +114,6 @@ export default function NestedList() {
           <ListItemButton
             sx={{ pl: 4 }}
             selected={selectedIndex === 6}
-            // onClick={(event) => handleListItemClick(event, 6)}
             onClick={(event) => {
               handleListItemClick(event, 6);
               history.push(AppRoutes.ListCategories);
@@ -128,7 +127,10 @@ export default function NestedList() {
           <ListItemButton
             sx={{ pl: 4 }}
             selected={selectedIndex === 7}
-            onClick={(event) => handleListItemClick(event, 7)}
+            onClick={(event) => {
+              handleListItemClick(event, 7);
+              history.push(AppRoutes.ListUnitMeasures);
+            }}
           >
             <ListItemIcon>
               <SquareFootIcon />

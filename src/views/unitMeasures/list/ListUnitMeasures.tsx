@@ -17,12 +17,12 @@ import Breadcrumb from 'src/components/breadcrumbs/Breadcrumbs';
 import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import AppRoutes from 'src/routes/routes';
-import { DeleteCategory, GetCategories } from 'src/services/categories';
+import { DeleteUnitMeasure, GetUnitMeasures } from 'src/services/unitMeasures';
 import useLayout from 'src/components/layout/useLayout';
 import { useSnackBar } from 'src/context/SnackbarContext';
 import Layout from '../../../components/layout';
 
-export default function ListCategories() {
+export default function ListUnitMeasures() {
   const history = useHistory();
   const snackBar = useSnackBar();
   const { setSelectedIndex } = useLayout();
@@ -30,32 +30,32 @@ export default function ListCategories() {
 
   setSelectedIndex(3);
 
-  const getCategories = React.useCallback(
+  const getUnitMeasures = React.useCallback(
     async () => {
-      await GetCategories()
+      await GetUnitMeasures()
         .then((response: any) => {
           setRows(response);
         })
         .catch(() => {
-          snackBar.showSnackBar('Erro ao listar categorias!', 'error');
+          snackBar.showSnackBar('Erro ao listar unidade de medidas!', 'error');
         });
     },
     [],
   );
 
   useEffect(() => {
-    getCategories();
+    getUnitMeasures();
   }, []);
 
-  const deleteCategory = React.useCallback(
+  const deleteUnitMeasure = React.useCallback(
     (id: string) => async () => {
       try {
-        await DeleteCategory(id);
-        snackBar.showSnackBar('categoria deletada com sucesso!', 'success');
-        getCategories();
+        await DeleteUnitMeasure(id);
+        snackBar.showSnackBar('Unidade de medida deletada com sucesso!', 'success');
+        getUnitMeasures();
         return;
       } catch (error) {
-        snackBar.showSnackBar('Erro ao deletar categoria!', 'error');
+        snackBar.showSnackBar('Erro ao deletar Unidade de medida!', 'error');
       }
     },
     [],
@@ -63,7 +63,7 @@ export default function ListCategories() {
 
   const showEdit = React.useCallback(
     (id: GridRowId) => () => {
-      history.push(`/categories/update/${id}`);
+      history.push(`/unitMeasures/update/${id}`);
     },
     [],
   );
@@ -74,7 +74,7 @@ export default function ListCategories() {
         field: 'name', headerName: 'Nome', type: 'string', width: 500,
       },
       {
-        field: 'description', headerName: 'Descrição', type: 'string', width: 500,
+        field: 'abbreviation', headerName: 'Abreviação', type: 'string', width: 500,
       },
       {
         field: 'actions',
@@ -94,19 +94,19 @@ export default function ListCategories() {
             key={3}
             icon={<DeleteIcon />}
             label="Remover"
-            onClick={deleteCategory(params.id)}
+            onClick={deleteUnitMeasure(params.id)}
             showInMenu
           />,
         ],
       },
     ],
-    [deleteCategory],
+    [deleteUnitMeasure],
   );
 
   return (
     <Layout>
       <Breadcrumb
-        breadcrumbs={['Categorias', 'Listagem']}
+        breadcrumbs={['Unidade de Medidas', 'Listagem']}
       />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3}>
@@ -128,7 +128,7 @@ export default function ListCategories() {
                 <Button
                   variant="outlined"
                   startIcon={<AddIcon />}
-                  onClick={() => history.push(AppRoutes.CreateCategories)}
+                  onClick={() => history.push(AppRoutes.CreateUnitMeasures)}
                 >
                   Adiconar
                 </Button>
