@@ -11,3 +11,19 @@ const api: AxiosInstance = axios.create({
 export const GetCategories = () => api
   .get('/categories')
   .then(({ data }) => data);
+
+export const GetCategory = (id: string) => api
+  .get(`/categories/${id}`)
+  .then(({ data }) => data);
+
+export const AddCategory = (payload: any) => api
+  .post('/categories', payload)
+  .then(({ data }) => data);
+
+export const UpdateCategory = (id: string, payload: any) => api
+  .put(`/categories/${id}`, payload)
+  .then(({ data }) => data);
+
+export const DeleteCategory = (id: string) => api
+  .delete(`/categories/${id}`)
+  .then(({ data }) => data);

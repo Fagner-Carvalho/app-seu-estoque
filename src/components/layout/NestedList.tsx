@@ -69,7 +69,6 @@ export default function NestedList() {
       <ListItemButton
         selected={selectedIndex === 2}
         onClick={(event) => handleListItemClick(event, 2)}
-        disabled
       >
         <ListItemIcon>
           <LocalShippingIcon />
@@ -93,7 +92,6 @@ export default function NestedList() {
       <ListItemButton
         selected={selectedIndex === 4}
         onClick={(event) => handleListItemClick(event, 4)}
-        disabled
       >
         <ListItemIcon>
           <InventoryIcon />
@@ -104,7 +102,6 @@ export default function NestedList() {
       <ListItemButton
         selected={selectedIndex === 5}
         onClick={(event) => handleListItemClick(event, 5)}
-        disabled
       >
         <ListItemIcon>
           <SettingsIcon />
@@ -117,7 +114,11 @@ export default function NestedList() {
           <ListItemButton
             sx={{ pl: 4 }}
             selected={selectedIndex === 6}
-            onClick={(event) => handleListItemClick(event, 6)}
+            // onClick={(event) => handleListItemClick(event, 6)}
+            onClick={(event) => {
+              handleListItemClick(event, 6);
+              history.push(AppRoutes.ListCategories);
+            }}
           >
             <ListItemIcon>
               <LocalOfferIcon />
