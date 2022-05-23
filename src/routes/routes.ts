@@ -13,6 +13,9 @@ enum AppRoutes {
   ListUnitMeasures = '/unitMeasures/list',
   CreateUnitMeasures = '/unitMeasures/create',
   UpdateUnitMeasures = '/unitMeasures/update/:id',
+  ListSuppliers = '/suppliers/list',
+  CreateSuppliers = '/suppliers/create',
+  UpdateSuppliers = '/suppliers/update/:id',
 }
 
 export const HOME = AppRoutes.Login;

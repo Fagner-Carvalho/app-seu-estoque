@@ -13,6 +13,8 @@ import ListCategories from 'src/views/categories/list';
 import FormCategories from 'src/views/categories/form';
 import ListUnitMeasures from 'src/views/unitMeasures/list';
 import FormUnitMeasures from 'src/views/unitMeasures/form';
+import ListSuppliers from 'src/views/suppliers/list';
+import FormSuppliers from 'src/views/suppliers/form';
 
 import AppRoutes, { HOME } from './routes';
 
@@ -34,6 +36,9 @@ const Routes = () => (
       <Route path={AppRoutes.ListUnitMeasures} component={ListUnitMeasures} exact />
       <Route path={AppRoutes.CreateUnitMeasures} component={FormUnitMeasures} exact />
       <Route path={AppRoutes.UpdateUnitMeasures} component={FormUnitMeasures} exact />
+      <Route path={AppRoutes.ListSuppliers} component={ListSuppliers} exact />
+      <Route path={AppRoutes.CreateSuppliers} component={FormSuppliers} exact />
+      <Route path={AppRoutes.UpdateSuppliers} component={FormSuppliers} exact />
       <Route
         path="*"
         render={() => (

@@ -68,7 +68,10 @@ export default function NestedList() {
 
       <ListItemButton
         selected={selectedIndex === 2}
-        onClick={(event) => handleListItemClick(event, 2)}
+        onClick={(event) => {
+          handleListItemClick(event, 2);
+          history.push(AppRoutes.ListSuppliers);
+        }}
       >
         <ListItemIcon>
           <LocalShippingIcon />
