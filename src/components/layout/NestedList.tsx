@@ -6,9 +6,9 @@ import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
+import SyncAltIcon from '@mui/icons-material/SyncAlt';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import CategoryIcon from '@mui/icons-material/Category';
-import InventoryIcon from '@mui/icons-material/Inventory';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import SquareFootIcon from '@mui/icons-material/SquareFoot';
@@ -94,12 +94,15 @@ export default function NestedList() {
 
       <ListItemButton
         selected={selectedIndex === 4}
-        onClick={(event) => handleListItemClick(event, 4)}
+        onClick={(event) => {
+          handleListItemClick(event, 4);
+          history.push(AppRoutes.ListInventoryMovements);
+        }}
       >
         <ListItemIcon>
-          <InventoryIcon />
+          <SyncAltIcon />
         </ListItemIcon>
-        <ListItemText primary="Estoque" />
+        <ListItemText primary="Movimentações" />
       </ListItemButton>
 
       <ListItemButton

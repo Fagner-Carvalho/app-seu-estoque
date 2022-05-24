@@ -15,6 +15,8 @@ import ListUnitMeasures from 'src/views/unitMeasures/list';
 import FormUnitMeasures from 'src/views/unitMeasures/form';
 import ListSuppliers from 'src/views/suppliers/list';
 import FormSuppliers from 'src/views/suppliers/form';
+import ListInventoryMovements from 'src/views/inventories/list';
+import FormListInventoryMovements from 'src/views/inventories/form';
 
 import AppRoutes, { HOME } from './routes';
 
@@ -39,6 +41,17 @@ const Routes = () => (
       <Route path={AppRoutes.ListSuppliers} component={ListSuppliers} exact />
       <Route path={AppRoutes.CreateSuppliers} component={FormSuppliers} exact />
       <Route path={AppRoutes.UpdateSuppliers} component={FormSuppliers} exact />
+      <Route path={AppRoutes.ListInventoryMovements} component={ListInventoryMovements} exact />
+      <Route
+        path={AppRoutes.CreateInventoryMovements}
+        component={FormListInventoryMovements}
+        exact
+      />
+      <Route
+        path={AppRoutes.UpdateInventoryMovements}
+        component={FormListInventoryMovements}
+        exact
+      />
       <Route
         path="*"
         render={() => (

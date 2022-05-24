@@ -16,6 +16,9 @@ enum AppRoutes {
   ListSuppliers = '/suppliers/list',
   CreateSuppliers = '/suppliers/create',
   UpdateSuppliers = '/suppliers/update/:id',
+  ListInventoryMovements = '/inventoryMovements/list',
+  CreateInventoryMovements = '/inventoryMovements/create',
+  UpdateInventoryMovements = '/inventoryMovements/update/:id',
 }
 
 export const HOME = AppRoutes.Login;
