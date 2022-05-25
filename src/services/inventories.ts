@@ -27,3 +27,11 @@ export const UpdateInventory = (id: string, payload: any) => api
 export const DeleteInventory = (id: string) => api
   .delete(`/inventoryMovements/${id}`)
   .then(({ data }) => data);
+
+export const GetReportInventoryValuePerItem = () => api
+  .get('/reportInventoryValuePerItem')
+  .then(({ data }) => data);
+
+export const GetReportInventoryQuantity = () => api
+  .get('/reportInventoryQuantity')
+  .then(({ data }) => data);
