@@ -8,22 +8,22 @@ const api: AxiosInstance = axios.create({
   },
 });
 
-export const GetCategories = () => api
-  .get('/categories')
+export const GetSuppliers = () => api
+  .get('/suppliers')
   .then(({ data }) => data);
 
-export const GetCategory = (id: string) => api
-  .get(`/categories/${id}`)
+export const GetSupplier = (id: string) => api
+  .get(`/suppliers/${id}`)
   .then(({ data }) => data);
 
-export const AddCategory = (payload: any) => api
-  .post('/categories', payload)
+export const AddSupplier = (payload: any) => api
+  .post('/suppliers', payload)
   .then(({ data }) => data);
 
-export const UpdateCategory = (id: string, payload: any) => api
-  .put(`/categories/${id}`, payload)
+export const UpdateSupplier = (id: string, payload: any) => api
+  .put(`/suppliers/${id}`, payload)
   .then(({ data }) => data);
 
-export const DeleteCategory = (id: string) => api
-  .delete(`/categories/${id}`)
+export const DeleteSupplier = (id: string) => api
+  .delete(`/suppliers/${id}`)
   .then(({ data }) => data);

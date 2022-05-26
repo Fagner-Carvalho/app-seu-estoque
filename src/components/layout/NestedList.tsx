@@ -6,9 +6,9 @@ import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
+import SyncAltIcon from '@mui/icons-material/SyncAlt';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import CategoryIcon from '@mui/icons-material/Category';
-import InventoryIcon from '@mui/icons-material/Inventory';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import SquareFootIcon from '@mui/icons-material/SquareFoot';
@@ -68,8 +68,10 @@ export default function NestedList() {
 
       <ListItemButton
         selected={selectedIndex === 2}
-        onClick={(event) => handleListItemClick(event, 2)}
-        disabled
+        onClick={(event) => {
+          handleListItemClick(event, 2);
+          history.push(AppRoutes.ListSuppliers);
+        }}
       >
         <ListItemIcon>
           <LocalShippingIcon />
@@ -92,19 +94,20 @@ export default function NestedList() {
 
       <ListItemButton
         selected={selectedIndex === 4}
-        onClick={(event) => handleListItemClick(event, 4)}
-        disabled
+        onClick={(event) => {
+          handleListItemClick(event, 4);
+          history.push(AppRoutes.ListInventoryMovements);
+        }}
       >
         <ListItemIcon>
-          <InventoryIcon />
+          <SyncAltIcon />
         </ListItemIcon>
-        <ListItemText primary="Estoque" />
+        <ListItemText primary="Movimentações" />
       </ListItemButton>
 
       <ListItemButton
         selected={selectedIndex === 5}
         onClick={(event) => handleListItemClick(event, 5)}
-        disabled
       >
         <ListItemIcon>
           <SettingsIcon />
@@ -117,7 +120,10 @@ export default function NestedList() {
           <ListItemButton
             sx={{ pl: 4 }}
             selected={selectedIndex === 6}
-            onClick={(event) => handleListItemClick(event, 6)}
+            onClick={(event) => {
+              handleListItemClick(event, 6);
+              history.push(AppRoutes.ListCategories);
+            }}
           >
             <ListItemIcon>
               <LocalOfferIcon />
@@ -127,7 +133,10 @@ export default function NestedList() {
           <ListItemButton
             sx={{ pl: 4 }}
             selected={selectedIndex === 7}
-            onClick={(event) => handleListItemClick(event, 7)}
+            onClick={(event) => {
+              handleListItemClick(event, 7);
+              history.push(AppRoutes.ListUnitMeasures);
+            }}
           >
             <ListItemIcon>
               <SquareFootIcon />

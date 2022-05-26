@@ -7,6 +7,18 @@ enum AppRoutes {
   ListItems = '/items/list',
   CreateItems = '/items/create',
   UpdateItems = '/items/update/:id',
+  ListCategories = '/categories/list',
+  CreateCategories = '/categories/create',
+  UpdateCategories = '/categories/update/:id',
+  ListUnitMeasures = '/unitMeasures/list',
+  CreateUnitMeasures = '/unitMeasures/create',
+  UpdateUnitMeasures = '/unitMeasures/update/:id',
+  ListSuppliers = '/suppliers/list',
+  CreateSuppliers = '/suppliers/create',
+  UpdateSuppliers = '/suppliers/update/:id',
+  ListInventoryMovements = '/inventoryMovements/list',
+  CreateInventoryMovements = '/inventoryMovements/create',
+  UpdateInventoryMovements = '/inventoryMovements/update/:id',
 }
 
 export const HOME = AppRoutes.Login;
