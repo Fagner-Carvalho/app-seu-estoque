@@ -1,18 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path');
+const fallback = require('express-history-api-fallback');
 const express = require('express');
-const { resolve } = require('path');
 
 const app = express();
+const root = path.join(__dirname, 'build');
 
-app.use('/', express.static(
-  resolve(__dirname, '.build'),
-));
-
-app.listen(
-  // eslint-disable-next-line consistent-return
-  process.env.PORT || 3000, (err) => {
-    if (err) { return console.log(err); }
-
-    console.log('app running');
-  },
-);
+app.use(express.static(root));
+app.use(fallback('index.html', { root }));
+app.listen(process.env.PORT || 3000);
