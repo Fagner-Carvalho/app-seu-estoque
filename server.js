@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const express = require('express');
-const { resolve } = require('path');
+import express from 'express';
+import { resolve } from 'path';
 
 const app = express();
 
